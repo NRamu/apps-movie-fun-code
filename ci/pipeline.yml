@@ -1,11 +1,11 @@
 resources:
-- name: movie-service
+- name: movies-service
   type: git
   source:
     uri: https://github.com/NRamu/apps-movie-fun-code     #<---- REPLACE ME
     branch: spring-boot
 
-- name: deploy-movie-service
+- name: deploy-movies-service
   type: cf
   source:
     api: https://api.system.cumuluslabs.io     #<---- REPLACE ME
@@ -19,11 +19,11 @@ jobs:
 - name: build
   public: true
   plan:
-  - get: movie-service
+  - get: movies-service
     trigger: true
   - task: package
-    file: movie-service/ci/tasks/package.yml
-  - put: deploy-movie-service
+    file: movies-service/ci/tasks/package.yml
+  - put: deploy-movies-service
     params:
-      manifest: movie-service/manifest.yml
-      path: package-output/movie-service.jar
+      manifest: movies-service/manifest.yml
+      path: package-output/movies-service.jar
