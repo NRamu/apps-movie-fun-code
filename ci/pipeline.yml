@@ -2,7 +2,7 @@ resources:
 - name: movie-service
   type: git
   source:
-    uri: https://github.com/NRamu/pcf-apps-movie-fun-code     #<---- REPLACE ME
+    uri: https://github.com/NRamu/apps-movie-fun-code     #<---- REPLACE ME
     branch: spring-boot
 
 - name: deploy-movie-service
