@@ -20,6 +20,7 @@ jobs:
   public: true
   plan:
   - get: movie-service
+    trigger: true
   - task: package
     file: movie-service/ci/tasks/package.yml
   - put: deploy-movie-service
