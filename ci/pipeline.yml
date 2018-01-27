@@ -1,0 +1,28 @@
+resources:
+- name: movie-service
+  type: git
+  source:
+    uri: https://github.com/NRamu/pcf-apps-movie-fun-code     #<---- REPLACE ME
+    branch: spring-boot
+
+- name: deploy-movie-service
+  type: cf
+  source:
+    api: https://api.system.cumuluslabs.io     #<---- REPLACE ME
+    username: {{cf-user}}
+    password: {{cf-password}}
+    organization: nramu-PAL-JAN22     #<---- REPLACE ME
+    space: sandbox                    #<---- REPLACE ME
+    skip_cert_check: true
+
+jobs:
+- name: build
+  public: true
+  plan:
+  - get: movie-service
+  - task: package
+    file: movie-service/ci/tasks/package.yml
+  - put: deploy-movie-service
+    params:
+      manifest: movie-service/manifest.yml
+      path: package-output/movie-service.jar
